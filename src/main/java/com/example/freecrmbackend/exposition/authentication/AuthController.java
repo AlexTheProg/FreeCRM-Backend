@@ -1,6 +1,6 @@
 package com.example.freecrmbackend.exposition.authentication;
 
-import com.example.freecrmbackend.application.service.AutheticationService;
+import com.example.freecrmbackend.application.service.auth.AutheticationService;
 import com.example.freecrmbackend.exposition.request.auth.AuthenticationRequest;
 import com.example.freecrmbackend.exposition.request.auth.RegisterRequest;
 import com.example.freecrmbackend.exposition.response.auth.AuthenticationResponse;

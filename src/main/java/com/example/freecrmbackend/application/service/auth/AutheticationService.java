@@ -1,4 +1,4 @@
-package com.example.freecrmbackend.application.service;
+package com.example.freecrmbackend.application.service.auth;
 
 import com.example.freecrmbackend.domain.user.User;
 import com.example.freecrmbackend.domain.user.Users;
@@ -12,6 +12,7 @@ import com.example.freecrmbackend.security.SecurityUser;
 import com.example.freecrmbackend.security.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
