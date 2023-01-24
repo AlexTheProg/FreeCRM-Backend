@@ -18,6 +18,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -41,7 +44,7 @@ public class AutheticationService {
                     .build();
 
             users.save(user);
-            var jwtToken = jwtService.generateToken(new SecurityUser(user));
+            var jwtToken = jwtService.generateToken(Map.of("roles", user.getAuthorities().toString()), new SecurityUser(user));
 
             return AuthenticationResponse.builder()
                     .token(jwtToken)
@@ -63,7 +66,7 @@ public class AutheticationService {
                 )
         );
 
-        var jwtToken = jwtService.generateToken(new SecurityUser(user));
+        var jwtToken = jwtService.generateToken(Map.of("roles", user.getAuthorities().toString()), new SecurityUser(user));
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)

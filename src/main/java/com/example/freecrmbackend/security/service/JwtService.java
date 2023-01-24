@@ -1,15 +1,17 @@
 package com.example.freecrmbackend.security.service;
 
 
+import com.example.freecrmbackend.security.SecurityUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.security.Security;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +32,12 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(SecurityUser userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
     public String generateToken(Map<String, Object> extraClaims,
-                                UserDetails userDetails) {
+                                SecurityUser userDetails) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
@@ -46,7 +48,7 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails) {
+    public boolean isTokenValid(String token, SecurityUser userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }

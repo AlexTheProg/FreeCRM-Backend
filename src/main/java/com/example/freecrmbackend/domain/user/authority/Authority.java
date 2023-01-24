@@ -28,4 +28,9 @@ public class Authority {
 
     @ManyToMany(mappedBy = "authorities")
     private Set<User> users;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
