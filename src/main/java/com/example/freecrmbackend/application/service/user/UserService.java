@@ -5,11 +5,11 @@ import com.example.freecrmbackend.domain.user.Users;
 import com.example.freecrmbackend.exposition.request.user.AddUserRequest;
 import com.example.freecrmbackend.security.service.PasswordGeneratorService;
 import lombok.RequiredArgsConstructor;
-import org.passay.CharacterData;
-import org.passay.CharacterRule;
-import org.passay.EnglishCharacterData;
-import org.passay.PasswordGenerator;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Role;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +17,13 @@ import javax.annotation.security.RolesAllowed;
 
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserService {
     private final Users users;
     private final PasswordGeneratorService passwordGeneratorService;
 
-    @RolesAllowed({"ADMIN"})
+    @RolesAllowed({"ROLE_USER"})
     public User addUser(AddUserRequest request){
 
         var password = PasswordEncoderFactories
@@ -37,6 +38,7 @@ public class UserService {
                 .email(request.email())
                 .build();
 
+        log.info("Principal user {}", SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray());
         users.save(user);
 
         return user;

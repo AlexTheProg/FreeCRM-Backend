@@ -3,7 +3,6 @@ package com.example.freecrmbackend.security.service;
 import com.example.freecrmbackend.domain.user.Users;
 import com.example.freecrmbackend.security.SecurityUser;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

@@ -3,6 +3,7 @@ package com.example.freecrmbackend.application.service.auth;
 import com.example.freecrmbackend.domain.user.User;
 import com.example.freecrmbackend.domain.user.Users;
 import com.example.freecrmbackend.domain.user.authority.Authorities;
+import com.example.freecrmbackend.domain.user.authority.Authority;
 import com.example.freecrmbackend.exposition.request.auth.AuthenticationRequest;
 import com.example.freecrmbackend.exposition.request.auth.RegisterRequest;
 import com.example.freecrmbackend.exposition.response.auth.AuthenticationResponse;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -66,7 +68,7 @@ public class AutheticationService {
                 )
         );
 
-        var jwtToken = jwtService.generateToken(Map.of("roles", user.getAuthorities().toString()), new SecurityUser(user));
+        var jwtToken = jwtService.generateToken(Map.of("roles", user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList())), new SecurityUser(user));
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
