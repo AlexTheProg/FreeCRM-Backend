@@ -1,8 +1,9 @@
-package com.example.freecrmbackend.application.service;
+package com.example.freecrmbackend.application.service.auth;
 
 import com.example.freecrmbackend.domain.user.User;
 import com.example.freecrmbackend.domain.user.Users;
 import com.example.freecrmbackend.domain.user.authority.Authorities;
+import com.example.freecrmbackend.domain.user.authority.Authority;
 import com.example.freecrmbackend.exposition.request.auth.AuthenticationRequest;
 import com.example.freecrmbackend.exposition.request.auth.RegisterRequest;
 import com.example.freecrmbackend.exposition.response.auth.AuthenticationResponse;
@@ -12,10 +13,15 @@ import com.example.freecrmbackend.security.SecurityUser;
 import com.example.freecrmbackend.security.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +46,7 @@ public class AutheticationService {
                     .build();
 
             users.save(user);
-            var jwtToken = jwtService.generateToken(new SecurityUser(user));
+            var jwtToken = jwtService.generateToken(Map.of("roles", user.getAuthorities().toString()), new SecurityUser(user));
 
             return AuthenticationResponse.builder()
                     .token(jwtToken)
@@ -62,7 +68,7 @@ public class AutheticationService {
                 )
         );
 
-        var jwtToken = jwtService.generateToken(new SecurityUser(user));
+        var jwtToken = jwtService.generateToken(Map.of("roles", user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList())), new SecurityUser(user));
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
