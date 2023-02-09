@@ -4,17 +4,12 @@ import com.example.freecrmbackend.domain.user.User;
 import com.example.freecrmbackend.domain.user.Users;
 import com.example.freecrmbackend.exposition.request.user.AddUserRequest;
 import com.example.freecrmbackend.security.service.PasswordGeneratorService;
+import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Role;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.security.RolesAllowed;
-
 
 @Service
 @Slf4j
@@ -23,7 +18,7 @@ public class UserService {
     private final Users users;
     private final PasswordGeneratorService passwordGeneratorService;
 
-    @RolesAllowed({"ROLE_USER"})
+    @RolesAllowed({"ROLE_ADMIN"})
     public User addUser(AddUserRequest request){
 
         var password = PasswordEncoderFactories
