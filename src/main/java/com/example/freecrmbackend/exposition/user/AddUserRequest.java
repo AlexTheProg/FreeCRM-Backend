@@ -1,4 +1,4 @@
-package com.example.freecrmbackend.exposition.request.user;
+package com.example.freecrmbackend.exposition.user;
 
 import org.springframework.lang.NonNull;
 

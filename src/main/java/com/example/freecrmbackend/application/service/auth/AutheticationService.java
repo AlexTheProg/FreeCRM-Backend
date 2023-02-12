@@ -4,22 +4,20 @@ import com.example.freecrmbackend.domain.user.User;
 import com.example.freecrmbackend.domain.user.Users;
 import com.example.freecrmbackend.domain.user.authority.Authorities;
 import com.example.freecrmbackend.domain.user.authority.Authority;
-import com.example.freecrmbackend.exposition.request.auth.AuthenticationRequest;
-import com.example.freecrmbackend.exposition.request.auth.RegisterRequest;
-import com.example.freecrmbackend.exposition.response.auth.AuthenticationResponse;
+import com.example.freecrmbackend.exposition.authentication.AuthenticationRequest;
+import com.example.freecrmbackend.exposition.authentication.RegisterRequest;
+import com.example.freecrmbackend.exposition.authentication.AuthenticationResponse;
 import com.example.freecrmbackend.infrastructure.exception.custom.UserAlreadyRegisteredException;
 import com.example.freecrmbackend.infrastructure.exception.custom.UserNotFoundException;
 import com.example.freecrmbackend.security.SecurityUser;
 import com.example.freecrmbackend.security.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 

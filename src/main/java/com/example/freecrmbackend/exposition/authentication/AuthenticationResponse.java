@@ -1,4 +1,4 @@
-package com.example.freecrmbackend.exposition.response.auth;
+package com.example.freecrmbackend.exposition.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

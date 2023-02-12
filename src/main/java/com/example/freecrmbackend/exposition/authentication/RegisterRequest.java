@@ -1,4 +1,4 @@
-package com.example.freecrmbackend.exposition.request.auth;
+package com.example.freecrmbackend.exposition.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class RegisterRequest {
     private String username;
     private String password;
+    private String email;
 }

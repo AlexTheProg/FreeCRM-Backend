@@ -2,7 +2,7 @@ package com.example.freecrmbackend.application.service.user;
 
 import com.example.freecrmbackend.domain.user.User;
 import com.example.freecrmbackend.domain.user.Users;
-import com.example.freecrmbackend.exposition.request.user.AddUserRequest;
+import com.example.freecrmbackend.exposition.user.AddUserRequest;
 import com.example.freecrmbackend.security.service.PasswordGeneratorService;
 import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;

@@ -2,7 +2,6 @@ package com.example.freecrmbackend.exposition.user;
 
 import com.example.freecrmbackend.application.service.user.UserService;
 import com.example.freecrmbackend.domain.user.User;
-import com.example.freecrmbackend.exposition.request.user.AddUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
