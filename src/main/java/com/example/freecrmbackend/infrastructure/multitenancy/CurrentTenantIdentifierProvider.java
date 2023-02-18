@@ -8,11 +8,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-
+@Component
 public class CurrentTenantIdentifierProvider implements CurrentTenantIdentifierResolver, HibernatePropertiesCustomizer {
 
     @Override
     public String resolveCurrentTenantIdentifier() {
+        if (TenantContext.getCurrentTenant() == null) {
+            return "PUBLIC_TENANT";
+        }
         return TenantContext.getCurrentTenant();
     }
 
