@@ -1,11 +1,13 @@
 package com.example.freecrmbackend.domain.user;
 
 import com.example.freecrmbackend.domain.user.authority.Authority;
+import com.example.freecrmbackend.domain.workspace.Workspace;
 import com.example.freecrmbackend.infrastructure.auditing.Auditable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 @Builder
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class User extends Auditable<String> {
     @Id
     @SequenceGenerator(
@@ -41,19 +44,8 @@ public class User extends Auditable<String> {
             inverseJoinColumns = @JoinColumn(name = "authority_id"))
     private Set<Authority> authorities;
 
-    public User(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
-
-    public User(){
-        this.userId = null;
-        this.firstName = null;
-        this.lastName = null;
-        this.username = null;
-        this.password = null;
-        this.authorities = null;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "workspace_id")
+    private Workspace workspace;
 
 }
