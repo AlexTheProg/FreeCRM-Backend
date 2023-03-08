@@ -1,9 +1,12 @@
 package com.example.freecrmbackend.infrastructure.multitenancy;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 
-public class TenantContext {
+@Slf4j
+@Component
+public final class TenantContext {
     private static final ThreadLocal<String> CURRENT_TENANT = new ThreadLocal<>();
 
     public static String getCurrentTenant() {
